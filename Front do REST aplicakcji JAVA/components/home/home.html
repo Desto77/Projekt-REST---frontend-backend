@@ -1,0 +1,61 @@
+<div class="container" style="margin-top: 50px;">
+    <div class="col-lg-6" style="margin-bottom: 50px;">
+        <h1>Add user</h1>
+        <form>
+            <div class="form-group">
+                <label for="firstName">First name:</label>
+                <input ng-model="newuser.firstName" type="text" class="form-control" id="firstName">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last name:</label>
+                <input ng-model="newuser.lastName" type="text" class="form-control" id="lastName">
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input ng-model="newuser.age" type="text" class="form-control" id="age">
+            </div>
+            <button ng-click="addUser(newuser); newuser=''" type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+    <div class="col-lg-6" style="margin-bottom: 50px;">
+        <h1>Users</h1>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <th>Id</th>
+                <th>
+                    <a href="#" ng-click="sortType = 'firstName'; sortReverse = !sortReverse" style="">
+                        First name
+                        <span ng-show="sortType == 'firstName' && !sortReverse" class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                        <span ng-show="sortType == 'firstName' && sortReverse" class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="#" ng-click="sortType = 'lastName'; sortReverse = !sortReverse">
+                        Last name
+                        <span ng-show="sortType == 'lastName' && !sortReverse" class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                        <span ng-show="sortType == 'lastName' && sortReverse" class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="#" ng-click="sortType = 'age'; sortReverse = !sortReverse">
+                        Age
+                        <span ng-show="sortType == 'age' && !sortReverse" class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                        <span ng-show="sortType == 'age' && sortReverse" class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+                    </a>
+                </th>
+                <th>Remove</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in users | orderBy:sortType:sortReverse">
+                    <td>{{user.id}}</td>
+                    <td>{{user.firstName}}</td>
+                    <td>{{user.lastName}}</td>
+                    <td>{{user.age}}</td>
+                    <td>
+                        <span ng-click="deleteUser(user, $index)" style="color: #d9534f; cursor: pointer;" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
